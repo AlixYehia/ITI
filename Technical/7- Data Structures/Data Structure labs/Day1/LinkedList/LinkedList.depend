@@ -1,4 +1,7 @@
 # depslib dependency file v1.0
-1732622782 source:c:\users\aliye\onedrive\desktop\iti\01-technical\8- datastructure\data structure labs\day1\linkedlist\main.cpp
+1732630656 source:c:\users\aliye\onedrive\desktop\iti\01-technical\8- datastructure\data structure labs\day1\linkedlist\main.cpp
 	<iostream>
+	"LinkedList.h"
+
+1732630638 c:\users\aliye\onedrive\desktop\iti\01-technical\8- datastructure\data structure labs\day1\linkedlist\linkedlist.h
 
