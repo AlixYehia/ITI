@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1732716088 source:c:\users\aliye\onedrive\desktop\iti\01-technical\8- datastructure\data structure labs\day2\stack_using_linkedlist\main.cpp
+	<iostream>
+	"Stack.h"
+
+1732716150 c:\users\aliye\onedrive\desktop\iti\01-technical\8- datastructure\data structure labs\day2\stack_using_linkedlist\include\stack.h
+	"Node.h"
+
+1732716127 c:\users\aliye\onedrive\desktop\iti\01-technical\8- datastructure\data structure labs\day2\stack_using_linkedlist\include\node.h
+
