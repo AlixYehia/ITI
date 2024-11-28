@@ -125,8 +125,10 @@ class LinkedList
             swapped = false;
             current = head;
 
-            while (current && current->Next != lastSorted) {
-                if (current->Data > current->Next->Data) {
+            while (current && current->Next != lastSorted)
+            {
+                if (current->Data > current->Next->Data)
+                {
                     swapData(current, current->Next);
                     swapped = true;
                 }
