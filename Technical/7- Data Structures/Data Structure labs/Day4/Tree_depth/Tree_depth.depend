@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1733422077 source:c:\users\aliye\onedrive\desktop\iti\01-technical\8- datastructure\data structure labs\day4\tree_depth\main.cpp
+	<iostream>
+	"Tree.h"
+
+1733430656 c:\users\aliye\onedrive\desktop\iti\01-technical\8- datastructure\data structure labs\day4\tree_depth\include\tree.h
+	"Node.h"
+
+1733422268 c:\users\aliye\onedrive\desktop\iti\01-technical\8- datastructure\data structure labs\day4\tree_depth\include\node.h
+
+1733430953 source:c:\users\aliye\onedrive\desktop\iti\01-technical\8- data structures and algorithms\data structure labs\day4\tree_depth\main.cpp
+	<iostream>
+	"Tree.h"
+
