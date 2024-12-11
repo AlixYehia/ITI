@@ -37,3 +37,8 @@ to devices.
 # **ABP Protocol Design on Falstad**
 
 ![image](assets/APB%20Protocol.png)
+
+
+## Documentation
+For detailed documentation, please refer to the PDF, [Implementation of APB Interface (Master/Slave) Using 
+Combinational and Sequential Logic Circuits](assets/APB%20Protocol.pdf)
