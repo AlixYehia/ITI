@@ -7,22 +7,29 @@ to devices.
 
 ![image](assets/APB.jpg)
 
-The APB bus uses the following primary signals: 
-• PADDR: Address bus. 
-• PWDATA: Write data bus. 
-• PRDATA: Read data bus. 
-• PSEL: Select signal, used to identify which peripheral is being accessed. 
-• PWRITE: Write control signal (indicates write operation). 
-• PENABLE: Enables the transfer cycle. 
-• PREADY: Slave ready signal, indicating the completion of the operation. 
+---
+
+## **Key Signals**
+
+| Signal   | Description |
+|----------|-------------|
+| **PADDR** | Address bus for specifying the peripheral address. |
+| **PWDATA** | Write data bus to transfer data to peripherals. |
+| **PRDATA** | Read data bus to fetch data from peripherals. |
+| **PSEL** | Peripheral select signal to indicate the target peripheral. |
+| **PWRITE** | Write control signal to determine the operation (write/read). |
+| **PENABLE** | Enables the transfer cycle. |
+| **PREADY** | Indicates the completion of the operation by the slave. |
+
+---
 
 # **Finite State Machines**
 
-1.	Master Interface
+### 1.	Master Interface
 
 ![image](assets/Master_FSM.png)
 
-2.	Slave Interface
+### 2.	Slave Interface
 
 ![image](assets/Slave_FSM.png)
 
