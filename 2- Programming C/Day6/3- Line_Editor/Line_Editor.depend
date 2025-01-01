@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1730184090 source:c:\users\aliye\onedrive\desktop\iti\c\line_editor\main.c
+	<stdio.h>
+	<stdlib.h>
+	<MyLibrary.h>
+
+1730180490 source:c:\users\aliye\onedrive\desktop\iti\c\day6\3- line_editor\main.c
+	<stdio.h>
+	<stdlib.h>
+	<MyLibrary.h>
+

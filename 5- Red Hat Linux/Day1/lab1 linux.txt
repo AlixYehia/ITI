@@ -1,0 +1,181 @@
+Q1) What is the different between cat and more command? 
+-------------------------------------------------------
+
+1- cat test.txt: shows the whole file contents at once
+2- more test.txt: shows file contents page by page (if pressed enter will display line by line) (if pressed space will display page by page)
+
+
+
+
+
+Q2) What is the command that will show system info? 
+----------------------------------------------------
+
+uname: displays operating system
+Linux
+
+
+# if added options (-n, -a, etc.)
+
+
+uname -n: displays name 
+"IC"
+
+uname -a: displays all info 
+"Linux IC 2.6.32-573.el6.x86_64 #1 SMP Wed Jul 1 18:23:37 EDT 2015 x86_64 x86_64 x86_64 GNU/Linux"
+
+
+
+
+
+Q3) What is the command that will print current timestamp?
+----------------------------------------------------------
+
+
+date: displays current date
+Tue Nov 12 20:06:54 CST 2024
+
+date -Iseconds / date -Iminutes, etc.
+
+valid options to be written right after -I
+--------------
+  - `hours'
+  - `minutes'
+  - `date'
+  - `seconds'
+  - `ns'
+
+
+
+Q4) What is the command that will print calendar of December 2001?
+
+cal: displays todays calendar with the today's day highlighted
+---
+    November 2024   
+Su Mo Tu We Th Fr Sa
+                1  2
+ 3  4  5  6  7  8  9
+10 11 12 13 14 15 16
+17 18 19 20 21 22 23
+24 25 26 27 28 29 30
+
+cal 2 21 2021: displays the calendar for the specified date entered
+-------------
+
+    February 2021   
+Su Mo Tu We Th Fr Sa
+    1  2  3  4  5  6
+ 7  8  9 10 11 12 13
+14 15 16 17 18 19 20
+21 22 23 24 25 26 27
+28
+
+
+
+Q5) What is the command that will create file at current directory?
+
+touch file.txt: creates an empty file if the file does not already exist if exists will do nothing
+
+
+
+Q6) What is the command that will print “hello world” at screen?
+
+echo hello world: displays hello world
+
+
+
+Q7) What is the difference between rm and rmdir using man?
+
+rm command is used to remove (delete) files only
+"rm: cannot remove `dir1': Is a directory"
+
+rm can remove directories if added option -r even if had contents inside: rm -r dir1
+
+
+
+rmdir command is used only to remove empty directories:
+"rmdir: failed to remove `dir1': Directory not empty"
+
+
+
+Q8) Display the man (manual) page of passwd command.
+
+man - format and display the on-line manual pages
+-------------------------------------------------
+
+man passwd  "press q to get out"
+
+
+
+Q9)  Create the following hierarchy under your home directory:
+
+     dir1			docs
+
+dir11    dir12			mycv
+
+file1
+
+
+mkdir: creates directory
+mkdir -p: creates nested directories
+
+
+separate commands by space and can do multiple commands
+-------------------------------------------------------
+
+mkdir -p dir1/dir11 dir1/dir12 docs
+
+touch dir1/dir11/file docs/mycv
+
+
+
+Q10) Remove dir11 in one-step. What did you notice? And how did you overcome that?
+
+rmdir: failed to remove `dir1/dir11': Directory not empty
+
+need to add -r
+--------------
+
+rm -r dir1/dir11
+
+
+
+Q11) Copy the /etc/passwd file to your home directory making its name is mypasswd.
+
+NOTE
+----
+/etc/passwd already exists in the system use '/' before etc 
+
+
+cp /etc/passwd /home/IC/ITI_Linux/mypasswd
+
+
+
+Q12) Rename this new file (which at your home) to be oldpasswd
+
+mv: used to move or rename files
+--------------------------------
+
+mv mypasswd oldpasswd
+
+
+
+Q13) Write the command which display the man page of the passwd file ”/etc/passwd”.
+
+to know the number to type use "man man" command then navigate to The standard sections of the manual 
+			       
+man 5 passwd
+
+
+
+Q14) Write the command which display a list of all the commands that contain the keyword “passwd” in their man/manual page.
+
+-k: keyword
+
+man -k passwd
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1730035963 source:c:\users\aliye\onedrive\desktop\iti\c\continous_employee_assignment\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<MyLibrary.h>
+
+1730670657 source:c:\users\aliye\onedrive\desktop\iti\c\day5\6- continous_employee_assignment\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<MyLibrary.h>
+

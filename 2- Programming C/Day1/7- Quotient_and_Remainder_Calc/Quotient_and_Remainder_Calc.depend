@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1729425342 source:c:\users\aliye\onedrive\desktop\iti\c\quotient_and_remainder_calc\main.c
+	<stdio.h>
+	<stdlib.h>
+

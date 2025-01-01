@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1729689650 source:c:\users\aliye\onedrive\desktop\iti\c\highlight_menu_with_arrows\main.c
+	<stdio.h>
+	<stdlib.h>
+	<MyLibrary.h>
+

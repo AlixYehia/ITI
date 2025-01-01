@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1729516862 source:c:\users\aliye\onedrive\desktop\iti\c\magic_box\main.c
+	<stdio.h>
+	<stdlib.h>
+	<MyLibrary.h>
+

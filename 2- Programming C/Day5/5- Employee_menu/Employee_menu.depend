@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1729779283 source:c:\users\aliye\onedrive\desktop\iti\c\employee_menu\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<MyLibrary.h>
+

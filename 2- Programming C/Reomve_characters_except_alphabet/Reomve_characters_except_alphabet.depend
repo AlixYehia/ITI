@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1729690186 source:c:\users\aliye\onedrive\desktop\iti\c\reomve_characters_except_alphabet\main.c
+	<stdio.h>
+	<stdlib.h>
+

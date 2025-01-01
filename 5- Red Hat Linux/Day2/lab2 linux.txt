@@ -1,0 +1,251 @@
+16. You are in /usr/bin, list four ways to go to your home directory
+--------------------------------------------------------------------
+
+Using the cd command with no arguments:
+cd
+
+Using the cd command with ~:
+cd ~
+
+Using the cd command with $HOME:
+cd $HOME
+
+Using cd with an absolute path:
+cd /home/username
+
+
+
+
+
+17. The output of the command pwd was /home/<your_user_name>. Write the absolute and relative path for the file /etc/passwd
+-----------------------------------------------------------------------------------------------
+
+1. Absolute Path
+
+/etc/passwd
+
+2. Relative Path
+
+../../etc/passwd
+
+
+
+
+
+18. Show the total directory size of /home/<your_user_name>
+------------------------------------------------------------
+
+command: du -sh $HOME   or   du -s -h $HOME    or    du -sh ~   or   du -sh   "for current directory"
+
+output:
+
+15G	/home/IC
+
+or
+
+15G	.	'.' means current directory
+
+
+du: Stands for "disk usage." It’s used to check the disk space used by files and directories.
+-s: Summarizes the total size rather than listing each file.
+-h: Displays the size in a human-readable format which means in Kb, Mb, Gb, instead of big numbers.
+
+
+
+
+
+19. List all files at your /etc which end with .config 
+------------------------------------------------------
+
+ls /etc/*.config
+
+
+
+
+
+20. Create a folder called /tmp/myconfig and copy to it all .config files from etc to it
+----------------------------------------------------------------------------------------
+
+mkdir -p /tmp/myconfig
+
+cp /etc/*.config /tmp/myconfig/
+
+
+
+
+
+21. Remove the directory /tmp/myconfig
+--------------------------------------
+
+rm -r /tmp/myconfig
+
+
+
+
+
+22. Display lines 1 to line 5 of /etc/passwd file
+-------------------------------------------------
+
+head -n 5 /etc/passwd      "default is 10 lines"
+
+(if you want to display from the end use tail instead of head)
+
+
+
+
+
+23. Using vi write your CV in the file /tmp/mycv. Your CV should include your name, age, school, 
+college, experience,...
+-----------------------------------------------------------------------------------------------
+
+touch /tmp/mycv
+
+vi /tmp/mycv
+
+Press i to begin typing.
+
+Press Esc to exit insert mode.
+
+Press shift ":" for column then choose "wq" and press Enter to save the file and quit.
+or Press shift ":" then type wq
+
+
+
+
+
+24. Open /tmp/mycv file using vi command then: Without using arrows state how to:  
+a. Move the cursor down one line at time.  
+b. Move the cursor up one line at time.  
+c. Search for word age  
+d. Step to line 5 (assuming that you are in line 1 and file is more than 5 lines).  
+e. Delete the line you are on  
+f. Delete line number 5.  
+g. How to step to the end of line and change to writing mode in one-step.
+----------------------------------------------------------------------------------
+
+a. Press j to move the cursor down one line.
+b. Press k to move the cursor up one line.
+c. 
+- Press / (forward search) and type age, then press Enter. This will search for the word "age" in the file.
+
+- press n to move to the next occurrence and N to move to the previous occurrence.Press / (forward search) and type age, then press Enter. This will search for the word "age" in the file.
+You can press n to move to the next occurrence and N to move to the previous occurrence.
+
+d. Type :5 and press Enter to move directly to line 5.
+e. Press dd to delete the current line.
+f. Type :5d
+g. Press Shift + a or CapsLk then a (capital A)    # to go to the end without insert mode use Shift + E
+
+
+
+
+
+25. Create a user account with the following attribute  
+● username: islam  
+● Fullname/comment: Islam Askar  
+● Password: islam
+------------------------------------------------------
+
+type su to be root
+
+sudo useradd -c "Islam Askar" islam    "-c "Islam Askar": Adds the full name (comment) for the user"
+
+sudo passwd islam
+
+
+"verify in /etc/passwd"
+
+
+
+
+
+26. Create a user account with the following attribute  
+● Username: baduser  
+● Full name/comment: Bad User  
+● Password: baduser
+------------------------------------------------------
+
+type su to be root
+
+sudo useradd -c "Bad User" baduser
+
+sudo passwd baduser
+
+
+"verify in /etc/passwd"
+
+
+
+
+
+27. Create a group called pgroup with group ID of 30000
+-------------------------------------------------------
+
+sudo groupadd -g 30000 pgroup       	-g 30000: Specifies the GID	pgroup: The name of the group.
+
+
+"verify using grep pgroup /etc/group"
+
+
+
+
+28. Create a group called badgroup
+----------------------------------
+
+sudo groupadd badgroup
+
+
+
+
+
+29. Add islam user to the pgroup group as a supplementary group
+---------------------------------------------------------------
+
+sudo usermod -aG pgroup islam		
+
+-a: Append the user to the supplementary group(s) without removing them from any existing groups.
+-G: Specifies the supplementary group (pgroup in this case).
+
+
+"verify using groups islam"
+
+
+
+
+
+30. Log out and log in by another user
+--------------------------------------
+
+su - islam			su: switch user
+
+
+
+
+
+31. Modify the password of islam's account to password
+------------------------------------------------------
+
+passwd islam		"must log first as root"
+
+or log to islam then 
+
+passwd
+
+
+
+32. Modify islam's account so the password expires after 30 days
+----------------------------------------------------------------
+
+sudo chage -M 30 islam	   "-M option sets the maximum number of days before the password expires."
+
+
+"verify using sudo chage -l islam"
+
+or
+
+chage -M 30 islam   "if logged as root"
+
+
+
+
+

@@ -1,0 +1,220 @@
+45. List the All environment variables in your current shell.
+--------------------------------------------------------------
+
+env
+
+
+
+
+
+46. What are the commands that list the value of a specific variable?
+----------------------------------------------------------------------
+
+
+echo $path	(variables that holds any value like path as built in )
+
+
+
+
+47. Display your current User name using Environment Variables.  
+----------------------------------------------------------------
+
+
+echo $USER
+
+
+
+
+48. Create a Bash shell alias named ls for the “ls –l” command, How to bypass this alias?  
+------------------------------------------------------------------------------------------
+
+Create the alias:
+=================
+
+alias ls='ls -l'
+
+source ~/.bashrc
+
+
+
+Bypass the alias:
+=================
+
+\ls			"Bypass"
+
+
+unalias ls		"Revert back"
+
+
+
+/bin/ls   		"ls exist in bin"
+
+
+
+
+
+51. Count the number of users at your Machine  
+----------------------------------------------
+
+"WC: stands for word count"
+
+
+
+wc -l /etc/passwd  		
+
+
+This shows the total number of user accounts (system and regular)defined on the machine.
+Output: A single number, the number of lines in /etc/passwd.
+
+Each line in /etc/passwd represents a user account. This includes:
+
+Regular users
+System users (e.g., root, nobody, service accounts)
+
+
+
+who | wc -l 
+
+
+What it does: Counts the number of currently logged-in users.
+Purpose: Shows how many users are actively logged in at the moment.
+Output: A single number, the number of users logged in.
+
+
+
+
+
+52. Search on user name “games” at your machine  
+------------------------------------------------
+
+grep games /etc/passwd
+
+
+"pgrep: searches in process"
+
+"grep: searches in general"
+
+
+
+
+
+53. Get the logins names of Users.
+-----------------------------------
+
+cut -d : -f1 /etc/passwd
+
+-d :    stands for making ':' as the delimiter to stop when faces
+
+-f1: 	field 1 which is column one which is the column of users
+
+
+
+
+
+54. Get the full names (comment) of Users. 
+-------------------------------------------
+
+cut -d: -f5 /etc/passwd
+
+
+
+
+
+55. Issue the command sleep 100. 
+----------------------------------
+
+sleep 100
+
+
+
+
+
+56. Stop the last command. 
+---------------------------
+
+ctrl + z
+
+kill %1      "%1: stands for the job number which is running" 
+
+
+
+
+
+57. Resume the last command in the background 
+----------------------------------------------
+
+ctrl + z
+
+bg %1     (use % if job and without if process which is listed by "ps" command)		"background"
+
+
+
+
+
+58. Issue the jobs command and see its output. 
+----------------------------------------------
+
+jobs
+
+
+output: [1]+  Done                    sleep 20
+
+
+
+
+
+59. Send the sleep command to the foreground and send it again to the background. 
+----------------------------------------------------------------------------------
+
+sleep 60 &		send to background
+
+fg %1		"or use: kill -SIGCONT 56342"
+
+
+
+
+
+60. Kill the sleep command. 
+----------------------------
+
+kill -9 56342
+
+
+output: [1]+  Killed                  sleep 100
+
+
+
+
+
+61. Display your processes only (process started by your username) 
+--------------------------------------------------------------------
+
+ps -u
+
+
+
+
+
+62. Use the pgrep command to list your processes only
+-------------------------------------------------------
+
+pgrep -u ali -l   (searches for processes that is run by ali and -l gives the names instead of numbers only)
+
+
+
+
+
+65. Start firefox application 
+---------------------------------
+
+firefox
+
+
+
+
+
+66. Send Signal kill to firefox 
+----------------------------------
+
+kill -9 121313
+

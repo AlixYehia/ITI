@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1731230449 source:c:\users\aliye\onedrive\desktop\iti\c++\day6\aggregation\main.cpp
+	<iostream>
+	<math.h>
+	<graphics.h>
+

@@ -1,0 +1,410 @@
+1. Use systemctl to view the status of all the system services.
+----------------------------------------------------------------
+
+systemctl list-units --type=service --all
+
+
+• systemctl: The command-line tool to interact with the systemd system and service manager.
+• list-units: Lists all systemd units.
+• --type=service: Filters the output to show only services.
+• --all: Includes inactive and disabled services in the list.
+
+
+
+
+2. Send mail to the root user.
+-------------------------------
+
+mail root
+
+
+
+
+
+3. Verify that you have received this mail. 
+--------------------------------------------
+
+sudo su root
+mail
+
+(can delete mail by typing d then number of the mail "d1")
+
+
+
+
+
+4. Use  systemctl utility to stop postfix service 
+--------------------------------------------------
+
+sudo systemctl stop postfix
+
+
+• sudo: postfix requires admin privileges.
+• systemctl: The command-line utility to control and manage systemd services.
+• stop: The action to stop the specified service.
+• postfix: The name of the service you want to stop which is postfix.
+
+(postfix service used for mail I wont be able to send mails but once I start it back I can see old ones as if I just paused receiving)
+
+
+
+
+5. Send mail again to the root user. 
+-------------------------------------
+
+mail root
+
+
+
+
+6. Verify that you have received this mail. 
+--------------------------------------------
+
+sudo su root
+mail
+
+
+output: no new mail
+
+
+
+
+
+7. Use systemctl utility to start postfix service 
+--------------------------------------------------
+
+sudo systemctl start postfix
+
+
+
+
+
+8. Verify that you have received this mail.
+--------------------------------------------
+
+sudo su root
+mail
+
+
+
+
+
+ 
+9. Edit in the GRUB2 configuration file and change the timeout variable equal 20 seconds. 
+-------------------------------------------------------------------------------------------
+
+sudo gedit /etc/default/grub
+
+GRUB_TIMEOUT=20
+
+sudo update-grub       (just update on old files)
+
+sudo reboot
+
+
+
+
+
+10. Edit in the GRUB2 configuration file and change your default operating system 
+-----------------------------------------------------------------------------------
+
+sudo gedit /etc/default/grub
+
+
+
+to know what to give to GRUB_DEFAULT you can use
+
+sudo grep menuentry /boot/grub/grub.cfg
+
+to list the available boot entries
+
+output:
+menuentry 'CentOS Linux (3.10.0-1062.el7.x86_64) 7 (Core)'
+menuentry 'CentOS Linux (0-rescue-ba09b75012064926980e7f68eab9dc74) 7 (Core)'
+
+so I can set GRUB_DEFAULT=0 for first boot as default or 1 for 2nd 
+
+
+
+• Regenerating the GRUB Configuration: After editing the GRUB configuration files, you need to regenerate the configuration file for GRUB to apply the changes:
+
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg           (creates new file)
+
+
+output:
+Found linux image: /boot/vmlinuz-3.10.0-1062.el7.x86_64
+Found initrd image: /boot/initramfs-3.10.0-1062.el7.x86_64.img
+Found linux image: /boot/vmlinuz-0-rescue-ba09b75012064926980e7f68eab9dc74
+Found initrd image: /boot/initramfs-0-rescue-ba09b75012064926980e7f68eab9dc74.img
+done
+
+
+
+
+
+11. You want to know some information about the status of the system (ps –e –f) every ten minutes today between the hours of  8:00 AM and 5:00 PM. to help investigate some performance issues you have been having. You suspect it might be processes related and want to keep an eye on those resources. 
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+crontab -e
+
+
+-e: allows you to edit the crontab file
+
+
+*/10 8-17 * * * ps -e -f > /performance.txt
+
+
+• */10: This means the job will run every 10 minutes.
+• 8-17: This specifies that the job should run only between 8:00 AM and 5:00 PM.
+• * * *: This means the job will run every day of the month and every month every year.
+• ps -e -f: This command shows a full-format list of all running processes.
+
+
+
+
+
+12. Use mail as the root user to check for e-mail from the cron jobs you have scheduled.
+-----------------------------------------------------------------------------------------
+
+sudo -i (switches to root)
+
+mail
+
+
+
+
+ 
+13. Configure OpenSSH to allow pulic key-based login credentials
+-----------------------------------------------------------------
+
+sudo systemctl start ssh
+
+sudo systemctl enable ssh
+
+sudo gedit /etc/ssh/sshd_config
+
+set the PubkeyAuthentication to yes which is default
+
+PubkeyAuthentication yes
+PasswordAuthentication no  # Optional, to disable password login
+
+
+
+
+14. Create an SSH key-pair
+---------------------------
+
+ssh-keygen -t rsa -b 2048
+
+
+• -t rsa flag specifies the type of key (RSA) "encryption type".
+• -b 2048 flag specifies the key size (2048 bits).
+
+
+
+
+
+15. Configure to login without the need of a password. 
+-------------------------------------------------------
+
+ssh -i path_to-priv_key user@ip
+
+-i: stands for identiy file and tells ssh to use specified private key for authentaction
+
+
+example:
+
+ssh -i /home/user/.ssh/my_key ali@localhost
+
+
+//////////////////////////////////////////////// Another Way /////////////////////////////////////////////////
+ssh-copy-id username@remote_host
+
+• Replace username with your actual username on the remote server.
+• Replace remote_host with the IP address or hostname of the remote machine.
+
+example:
+
+ssh-copy-id user@192.168.1.100
+
+
+You will be prompted to enter the password for the remote user. After this, the public key will be copied to the ~/.ssh/authorized_keys file on the remote server.
+
+
+Once the public key is copied, you should be able to log into the remote machine without being prompted for a password:
+
+ssh username@remote_host
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+16. Configure SSH to prevent root logins.
+------------------------------------------
+
+sudo nano /etc/ssh/sshd_config
+
+
+#PermitRootLogin yes
+
+change to
+
+PermitRootLogin no
+
+
+
+
+
+17. Using the useradd command, add accounts for the following users in your system: user1, user2. Remember to give each user password.
+-----------------------------------------------------------------------------------------------------------------------------
+
+sudo useradd user1
+sudo useradd user2
+
+sudo passwd user1
+sudo passwd user1
+
+
+
+
+ 
+18. Using the groupadd command, add the following groups to your system. 
+Group  GID
+sales  10000
+--------------------------------------------------------------------------
+
+sudo groupadd -g 10000 sales
+
+
+
+
+
+19. Using the usermod command to add user1 and user2 to the sales secondary group
+----------------------------------------------------------------------------------
+
+sudo usermod -aG sales user1
+sudo usermod -aG sales user2
+
+
+verify using:
+
+groups user1
+groups user2
+
+
+
+
+
+20. Login as each user and use id command to verify that they are in the appropriate groups.
+---------------------------------------------------------------------------------------------
+
+su - user1
+id
+
+su - user2
+id
+
+
+
+
+
+21. Create a directory called /depts with a sales sub-directory within the /depts directory. i.e: /depts/sales
+----------------------------------------------------------------------------------------------------------------
+
+mkdir /depts/sales
+
+
+
+
+ 
+22. Set the permissions on the /depts directory to 755, and each subdirectory to 770 
+--------------------------------------------------------------------------------------
+
+sudo chmod 755 /depts
+
+sudo chmod -R 770 /depts/sales
+
+
+-R: sets permission recursively to all subdirectories
+
+
+
+
+
+23. Set the set-gid bit on /depts/sales directory 
+--------------------------------------------------
+
+
+Default Behavior (Without Setgid on Directory):
+
+When a user creates a new file in a directory, the group ownership of the file is assigned based on the user's primary group. For example, if the user is part of the user1 group and creates a file in a directory, the group ownership of that file will be user1.
+
+
+Behavior with Setgid on Directory:
+
+When the setgid bit is set on a directory, any new file or subdirectory created within that directory will inherit the group ownership of the directory itself, instead of the user's primary group.
+
+
+
+sudo chmod g+s /depts/sales
+
+
+• g: Refers to the group.
+• +: Adds or sets the specified permission.
+• s: Stands for the Set Group ID (setgid) permission.
+
+
+
+verify using:
+
+ls -ld /depts/sales
+
+output:
+drwxr-sr-x. 2 root root 6 Nov 22 10:21 /depts/sales
+
+s here is assigned
+
+
+
+24. Set the set Sticky bit on /depts/sales directory 
+-----------------------------------------------------
+
+When the sticky bit is set on a directory, only the owner of a file within that directory can delete or rename the file, regardless of the directory's permissions.
+
+This is typically used on shared directories, like /tmp, where many users have write permissions, but you want to prevent users from deleting or modifying files created by others.
+
+
+
+sudo chmod +t /depts/sales
+
+
+verify:
+
+ls -ld /depts/sales
+drwxrws--T. 2 root root 6 Nov 22 10:21 /depts/sales
+
+
+
+
+
+
+25. Use the su command to switch to the user2 account and attempt the following commands: 
+1. touch /depts/sales/user2_1.txt 
+2. touch /depts/sales/user2_2.txt 
+3. rm /depts/sales/user2_1.txt
+----------------------------------------------------------------------------------------------
+
+su user2
+
+1- permission denied
+2- 
+
+
+
+26. Use the su command to switch to the user1 account and attempt the following commands: 
+a. rm /depts/sales/user2_2.txt 
+-------------------------------------------------------------------------------------------
+
+

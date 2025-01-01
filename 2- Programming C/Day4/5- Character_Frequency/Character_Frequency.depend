@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1729684284 source:c:\users\aliye\onedrive\desktop\iti\c\character_frequency\main.c
+	<stdio.h>
+	<stdlib.h>
+

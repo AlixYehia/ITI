@@ -1,0 +1,356 @@
+83. List the directories that have 777 Permissions in the system.
+-----------------------------------------------------------------
+
+find / -d -perm 777 1>success.log 2>errors.log
+
+
+1>: redirect succussed operations
+
+2>: redirect denied/error operations
+
+
+stdout (File Descriptor 1):
+
+Used for normal output of a program.
+Example: The directories found by the find command.
+
+stderr (File Descriptor 2):
+
+Used for error messages or diagnostic output.
+Example: "Permission denied" errors when searching in restricted directories.
+
+
+
+
+
+84. Remove package ncompress and ksh
+-------------------------------------
+
+sudo remove ncompress ksh
+
+
+
+
+
+85. Create a symbolic link of /etc/passwd in /boot.
+----------------------------------------------------
+
+sudo ln -s /etc/passwd /boot/passwd_shortcut
+
+
+
+ln: stands for link
+-s: stands for symbolic link (soft link) or as we say "shortcut"
+
+
+Symbolic Link (Soft Link):
+--------------------------
+• A soft link is like a shortcut. It contains a path to the original file or directory.
+• It's inode is different from the original file.
+• If the original file is deleted, the symbolic link becomes broken (dangling).
+• Symbolic links can span across file systems or partitions.
+
+
+verify using
+------------
+
+ls -l /boot
+
+output: lrwxrwxrwx. 1 root root       11 Nov 19 14:07 passwd_shortcut -> /etc/passwd
+
+l: in the beginning stands for link
+passwd_shortcut ->: is a pointer just like in  c++ that points to /etc/passwd
+
+
+remove link using
+------------------
+
+sudo unlink /boot/passwd_shortcut
+
+
+
+
+
+86. Create a hard link of /home/iti/f1.txt in /home/iti/Desktop.
+-----------------------------------------------------------------
+
+ln /home/iti/f1.txt /home/iti/Desktop
+
+
+
+Hard Link:
+----------
+• Main thing it doesn't consume any more additional space 
+• A hard link is essentially another name for the same file. It points directly to the inode of the 
+• file on the disk and not for directory. 
+• Both the original file and the hard link share the same inode number.
+• Changes made to the file are reflected in all hard links pointing to that file.
+• Hard links cannot span across different file systems or partitions.
+
+
+
+
+ 
+87. List the inode number of /home/iti/f1.txt  
+----------------------------------------------
+
+ls -i /home/iti/f1.txt
+
+
+
+-i: Displays the inode number of the file alongside its name.  (inode is unique for each file check notes for full description of it)
+
+
+output: 77297 /home/ali/iti/f1.txt
+
+
+
+
+
+88. Copy /etc/passwd to your home directory, use the commands diff, and Edit in the file you 
+copied, and then use these command again, and check the output.
+----------------------------------------------------------------------------------------------
+
+cp /etc/passwd ~/passwd_copy
+
+diff /etc/passwd ~/passwd_copy
+
+
+output: nothing since both identical
+
+
+gedit passwd_copy
+
+added: change
+
+
+diff /etc/passwd ~/passwd_copy
+
+
+output: 
+44a45     "The a means "add" so line 45 in the second file (~/passwd_copy) is added after line 44 in the first file (/etc/passwd)."
+> change
+
+
+
+
+
+==================================== Advanced Topics Lab1 ==========================================
+
+
+Using sed utility       (sed command stands for Stream Editor it doesn't affect original file)
+------------------
+
+
+
+
+1- Display the lines that contain the word “lp” in /etc/passwd file.
+---------------------------------------------------------------------
+
+sed -n '/lp/p' /etc/passwd
+
+
+• -n:   Tells sed not to print anything by default.    (that is why without it you see the lines 2 times)
+• /lp/: Searches for lines containing the word "lp".
+• p:    Prints the matching lines.
+
+
+
+
+
+2- Display /etc/passwd file except the third line.
+---------------------------------------------------
+
+sed '3d' /etc/passwd
+
+
+• 3d: Deletes the third line. Since -n is not used, sed prints all lines except the third.
+
+
+
+
+
+3- Display /etc/passwd file except the last line.  
+--------------------------------------------------
+
+sed '$d' /etc/passwd
+
+
+• $d: Deletes the last line (denoted by $ for the last line).
+
+
+
+
+4- Display /etc/passwd file except the lines that contain the word “lp”.  
+-------------------------------------------------------------------------
+
+sed '/lp/d' /etc/passwd
+
+
+• d: Deletes those lines. The result is the file without any lines that contain "lp".
+
+
+
+
+5- Substitute all the words that contain “lp” with “mylp” in /etc/passwd file. 
+--------------------------------------------------------------------------------
+
+sed 's/\blp\b/mylp/g' /etc/passwd
+
+
+• s/: substitution  (note must stick it next to the next commands or will remove one space)
+• \b: Word boundary (ensures we're matching whole words).
+• lp: Matches any word starting with "lp".
+• mylp: Replaces the matched word with "mylp".
+• g: Replaces all occurrences of the pattern in each line.
+
+
+
+
+
+
+
+Using awk utility     (named after it's 3 authors and used for pattern scanning and processing )
+-----------------
+
+
+notes:
+
+NR: Number of Records (for current line/record)
+NF: Number of Fields  (for current line/record)
+
+
+
+
+1- Print full name (comment) of all users in the system.  
+----------------------------------------------------------
+
+awk -F: '{print $5}' /etc/passwd   (system users and service accounts will be displayed)
+
+
+• -F:: Sets the field separator to ':' .
+• $5: Refers to the "full name" (comment) field in /etc/passwd, which is the 5th field.
+
+
+
+
+
+
+2- Print login, full name (comment) and home directory of all users.( Print each line preceded by a line number)  
+-----------------------------------------------------------------------------------------------------------------
+
+awk -F: '{print NR, $1, $5, $6}' /etc/passwd
+
+
+• NR: Prints the line number.
+• $1: Login name (1st field).
+• $5: Full name (comment, 5th field).
+• $6: Home directory (6th field).
+
+
+
+
+
+
+3- Print login, uid and full name (comment) of those uid is greater than 500
+-----------------------------------------------------------------------------
+
+awk -F: '$3 > 500 {print $1, $3, $5}' /etc/passwd
+
+
+• $3: UID field (3rd field).
+• {print $1, $3, $5}: Prints the login name, UID, and full name.
+• $3 > 500: Filters only those users whose UID is greater than 500.
+
+
+
+
+
+4- Print login, uid and full name (comment) of those uid is exactly 500  
+-------------------------------------------------------------------------
+
+awk -F: '$3 == 500 {print $1, $3, $5}' /etc/passwd
+
+
+• $3 == 500: Filters users with UID exactly equal to 500.
+
+
+
+
+
+
+5- Print line from 5 to 15 from /etc/passwd
+--------------------------------------------
+
+awk 'NR>=5 && NR<=15' /etc/passwd
+
+
+• NR>=5 && NR<=15: Filters and prints lines from 5 to 15 based on the line number.
+
+Note: if i want to print all along NR add {print NR,$0}
+
+
+
+
+
+
+
+6- Change lp to mylp  
+---------------------
+
+awk '{gsub(/lp/, "mylp"); print}' /etc/passwd
+
+• gsub(/lp/, "mylp"): Substitutes all occurrences of "lp" with "mylp" in each line.
+• print: Prints the modified line.
+
+
+
+
+
+
+7- Print all information about greatest uid.
+---------------------------------------------
+
+awk -F: 'BEGIN {max_uid = 0} {if ($3 > max_uid) {max_uid = $3; max_line = $0}} END {print max_line}' /etc/passwd
+
+
+IMPORTANT
+=========
+BEGIN: for intilaiztion for first time only so it can get updated later
+END:   to use the final output
+
+
+• max_uid = 0: Initializes the maximum UID to 0.
+• $3 > max_uid: Compares each UID (3rd field) with the current maximum and updates it accordingly.
+• max_line: Stores the line with the greatest UID.
+• END {print max_line}: After processing all lines, prints the information for the user with the greatest UID.
+
+
+
+
+
+
+
+8- Get the sum of all accounts id’s. 
+-------------------------------------
+
+awk -F: '{sum += $3} END {print sum}' /etc/passwd
+
+
+• $3: The UID field (3rd field).
+• sum += $3: Adds each UID to the sum variable.
+• END {print sum}: After processing all lines, prints the total sum of all UIDs.
+
+
+
+/********************* Another Method ***********************/
+
+another solution but longer coding by using for loop
+
+awk -F: '{for(i=1; i<=NF; i++) if(i==3) sum += $i} END {print sum}' /etc/passwd
+
+
+i=1: since first field starts with $1
+
+
+

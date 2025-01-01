@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1730031643 source:c:\users\aliye\onedrive\desktop\iti\c\asci_number\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1730586354 source:c:\users\aliye\onedrive\desktop\iti\c\day4\2- asci_number\main.c
+	<stdio.h>
+	<stdlib.h>
+

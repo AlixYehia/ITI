@@ -1,0 +1,117 @@
+1. cd .. : This command moves you up one directory level in the file system. For example, if you’re currently in /home/user/documents, using cd .. will take you to /home/user.
+
+2. cd - : This command switches you to the previous directory you were in, regardless of its relationship to the current directory. It acts as a shortcut to toggle between the last two directories you’ve accessed. After using cd -, the shell also prints the path of the previous directory for confirmation.
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+These commands use Vim’s :set command to toggle specific options on and off. Here’s a breakdown of each acronym:
+
+nu and nonu: "nu" stands for "number." :set nu displays line numbers, while :set nonu hides them.
+
+ic and noic: "ic" stands for "ignorecase." :set ic makes searches case-insensitive, while :set noic makes searches case-sensitive.
+
+showmode and noshowmode: This setting controls the display of Vim’s mode (such as "INSERT" or "REPLACE") in the status line. :set showmode enables this display, and :set noshowmode disables it.
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+The /etc/shadow file in Linux stores secure user account information, especially related to passwords. Each line in this file corresponds to a user account and includes several fields, separated by colons (:). Here’s a breakdown of each field:
+
+Username: The name of the user account.
+
+Encrypted password: The hashed password for the user. An ! or * here typically means the account is locked or has no password.
+
+Last password change: The number of days since January 1, 1970 (the Unix epoch) when the password was last changed.
+
+Minimum days: The minimum number of days required before a password can be changed. A value of 0 means the password can be changed anytime.
+
+Maximum days: The maximum number of days a password can be used before it must be changed.
+
+Warning period: The number of days before the password expires that the user is warned.
+
+Inactive: The number of days after the password expires before the account is disabled. If empty, the account does not automatically become inactive.
+
+Account expiration date: The date on which the account will be disabled, specified as the number of days since the Unix epoch. Empty if there’s no expiration date.
+
+Reserved (future use): This field is reserved for future use and is typically left blank.
+
+These fields help manage password aging and enforce security policies in Unix-like systems.
+
+
+
+
+----------------------------------------------------------------------------------------------
+
+Why total 0?  (when appears for files disk usage)
+
+For Unix domain sockets (like the ones listed in your output), they don’t actually consume any disk space in the traditional sense because they are used for inter-process communication and don't hold data themselves. The 0 total indicates that these files (sockets) don’t occupy any significant disk space.
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+
+
+
+Understanding ps -u $USER -o pid=
+ps -u $USER:
+
+This part of the command lists the processes running under your user account.
+$USER is a variable that stores your username, so this command will list all processes owned by you.
+-o pid=:
+
+The -o flag allows you to specify the output format. In this case, you're telling ps to display only the PID (Process ID) column.
+pid=: The pid refers to the process ID, and the = sign after pid ensures no header (no column name) is printed in the output. Normally, ps would include a header, like PID, at the top of the column, but by using =, you're telling it not to print this header.
+
+
+
+------------------------------------------- Inode -----------------------------------------------
+
+
+An inode (index node) is a data structure used by many file systems, such as ext3 or ext4 in Linux, to store metadata about a file or directory. Each file or directory has a unique inode, which contains information about the file, but not the file’s name or its actual data.
+
+Key Information Stored in an Inode:
+------------------------------------
+
+1. File Type: Whether it’s a regular file, directory, symbolic link, etc.	
+2. File Size: The size of the file in bytes.
+3. Permissions: The access rights (read, write, execute) for the file’s owner, group, and others.
+4. Owner Information: User ID (UID) and Group ID (GID) of the file owner.
+5. Timestamps:
+	• Access Time: Last time the file was accessed.
+	• Modification Time: Last time the file’s content was modified.	
+	• Change Time: Last time the inode itself was modified (e.g., permissions were changed).
+6. Number of Hard Links: The number of references to this inode.	
+7. Pointers to Data Blocks: References to the actual disk blocks where the file’s data is stored.
+
+How Does it Work?
+-----------------
+	• When a file is created, an inode is allocated for it.
+	• The file name is stored in a directory entry, which acts as a pointer to the inode.
+	• The inode itself stores all other information about the file except its name.
+
+Viewing an Inode:
+-----------------
+
+You can use the ls -i command in Linux to display the inode number of a file:
+
+ls -i filename
+
+Example:
+--------
+
+$ ls -i file.txt
+12345 file.txt
+
+Here, 12345 is the inode number of file.txt.
+
+Why is it Important?
+---------------------
+	• File Identification: The system uses the inode number to find files, not their names.
+	• Hard Links: Multiple filenames can point to the same inode, allowing shared data.
+	• Efficient Data Management: Separating metadata from directory entries enables flexible file handling.

@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1730696400 source:c:\users\aliye\onedrive\desktop\iti\c\day7\5- line_editor_dynamic\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<MyLibrary.h>
+

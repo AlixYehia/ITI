@@ -1,0 +1,189 @@
+33. Lock bad user account so he can't log in  
+---------------------------------------------
+
+usermod -L baduser
+
+
+usermod -U baduser: to unlock
+
+
+
+34. Delete bad user account
+----------------------------
+
+userdel -r baduser
+
+
+or manually remove the user from
+
+ • /etc/passwd file
+ • /etc/shadow file
+ • /etc/group file
+ • remove the user's home directory (/home/username)
+ • and mail spool file (/var/spool/mail/username)
+
+
+
+
+
+35. Delete the group called badgroup
+-------------------------------------
+
+groupdel badgroup
+
+
+
+
+
+ 
+36. As you Super user, Set or change the password of root 
+----------------------------------------------------------
+
+first add my user to sudoers file to become a super user
+IC  ALL=(ALL)  ALL
+
+sudo passwd root
+
+
+
+
+37. As you Super user, Try to remove all files in /tmp  
+-------------------------------------------------------
+
+rm -r /tmp/*         				# -f forces delete without asking
+
+output: rm: descend into write-protected directory `/tmp/orbit-gdm'?
+
+
+
+
+
+38. Create a folder called /tmp/myteam and change its permissions to read only for the owner, and Group and Other don't have permission on it.
+------------------------------------------------------------------------------------------------------------------------
+
+mkdir /tmp/myteam
+
+
+Read(4)
+Write(2)
+Execute(1)
+
+
+chmod 400 /tmp/myteam    	# this is octal mode
+
+chmod u=r,g=,o=  /tmp/myteam	# symbol mode
+
+
+ls -ld /tmp/myteam   	 	# to check permissions set
+
+
+
+
+39. Log out and log in by another user
+---------------------------------------
+
+su islam
+
+
+
+
+40. Try to access (by cd command) the folder (myteam)  
+------------------------------------------------------
+
+cd /tmp/myteam
+
+output: Permission denied		# since it was created on islam and I dont have permission
+
+
+
+
+
+41. Change the permissions of /tmp/mycv file to give owner read and write permissions and for group write and execute and execute only for the others (using chmod in 2 different ways )
+--------------------------------------------------------------------------------------------------------------------------
+
+Read(4)
+Write(2)
+Execute(1)
+
+chmod 631 /tmp/mycv				# Octal way
+
+chmod u=rw,g=wx,o=x /tmp/mycv			# symbol
+
+
+
+output: drw--wx--x. 2 islam islam 4096 Nov 14 20:48 /tmp/myteam
+
+
+
+
+42. What are the minimum permission needed for :  
+a. Copy a file (permission for source file and permission for target parent directory)  
+b. Delete a file  
+c. Change to a directory  
+d. List a directory content (ls command)  
+e. View a file content (more/cat command)  
+f. Modify a file content
+----------------------------------------------------------------------------------------------
+
+a. - file: Read for source file to be able to read contents and copy 
+   - directory: Write to create a copy (paste in directory)
+
+b. Write
+c. Execute
+d. Read
+e. Read
+f. Write
+
+
+
+
+
+43. Create a file with permission 444 in /tmp directory. Try to edit in it and to remove it? Note what happened.
+----------------------------------------------------------------------------------------------
+
+touch /tmp/myfile
+
+chmod 444 /tmp/myfile
+
+
+output: Permission denied
+
+
+
+
+44. What is the difference between the “x” permission for a file and for a directory
+--------------------------------------------------------------------------------------
+
+for file I can run it it is executable (application file)
+for directory I can access it's contents by double clicking
+
+
+
+
+
+49. How to check if your internet connection works?
+------------------------------------------------------
+
+ifconfig         # to check your network interface's status and IP address.
+
+
+ping 8.8.8.8   # checks if i can connect to google DNS server
+
+
+output: "for me since i am not connected to internet"   connect: Network is unreachable
+
+
+
+
+
+50. By editing /etc/hosts, make the URL www.iti-project-dep.com forward you to 195.10.10.2
+-------------------------------------------------------------------------------------------
+
+vi /etc/hosts
+
+
+195.10.10.2  www.iti-project-dep.com
+
+
+for test "ping www.iti-project-dep.com"
+

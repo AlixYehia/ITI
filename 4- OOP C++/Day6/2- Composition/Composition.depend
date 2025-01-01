@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1731245457 source:c:\users\aliye\onedrive\desktop\iti\c++\day6\composition\main.cpp
+	<iostream>
+	<math.h>
+	<graphics.h>
+

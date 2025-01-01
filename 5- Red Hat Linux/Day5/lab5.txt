@@ -1,0 +1,273 @@
+63. List the user commands(in /bin) and redirect the output to /tmp/commands.list  
+----------------------------------------------------------------------------------
+
+ls /bin > /tmp/commands.list
+
+
+
+
+
+
+
+
+64. (based on previous Question) Count the number of user commands
+-------------------------------------------------------------------
+
+wc -l /tmp/commands.list
+
+
+
+
+
+
+
+
+
+67. Get the logins name and full names (comment) of logins starts with “gu”.
+----------------------------------------------------------------------------
+
+grep '^gu' /etc/passwd | cut -d: -f1,5
+
+
+
+|: stands for pipeline to perform more than one action together
+
+
+
+
+
+68. Display the number of users who is logged now to the system.
+----------------------------------------------------------------- 
+
+who | wc -l
+
+
+
+wc: Counts characters, words, and lines in the output of the who command.
+
+in this case
+------------
+Output format: Displays three numbers:
+The number of lines (logged-in users).
+The number of words.
+The number of characters.
+
+
+-l: Each line in the who output corresponds to a logged-in user, so this command directly gives the number of logged-in users since -l will list them.
+
+
+
+
+
+69. Display lines 7 to line 10 of /etc/passwd file  
+---------------------------------------------------
+
+head -n 10 /etc/passwd | tail -n 4
+
+
+
+
+
+70. Search for all files on the system that named “.bash_profile” using two methods.
+-------------------------------------------------------------------------------------
+
+find / -name ".bash_profile"
+
+
+/: Search the entire file system starting from the root directory
+
+-name ".bash_profile": Look for files specifically named .bash_profile
+
+
+
+locate .bash_profile
+
+
+The locate command uses a pre-built database of file names and paths, which makes it faster than find but requires the database to be updated regularly.
+
+
+
+
+
+
+71. Install Packages called ncompress, ksh
+-------------------------------------------
+
+sudo yum install ncompress ksh
+
+sudo yum remove ncompress ksh
+
+
+
+
+
+
+
+72. Kill your processes only (be care: save lab before command execution).
+--------------------------------------------------------------------------
+
+kill -9 $(ps -u $USER)
+
+pkill -u $USER === killall -u $USER   (will do the same operation)
+
+
+Note: 
+
+Killall: kill processes owned by the current user, including killall itself.
+
+
+
+note: ps -o    option -o helps me to specify what to display
+
+
+
+
+
+73.  Sort /etc/passwd based on the full names of users and save output to external file.  
+------------------------------------------------------------------------------------------
+
+sort -t: -k5 /etc/passwd > /sorted_passwd.txt
+
+
+-t: is the delimiter specifier for sort command like -d for cut command so the first ':' it encounters it stops
+
+-k5: keyword 5 Specifies that the sorting should be done based on the fifth field (the full names).
+
+
+
+
+
+74. Search for all files on the system that named “passwd” using two methods.
+-----------------------------------------------------------------------------
+
+find / -name "passwd"
+
+locate passwd
+
+
+can add option -i for case insensitive
+
+
+
+
+
+75. remove Packages called ncompress,ksh
+------------------------------------------
+
+sudo yum remove ncompress ksh
+
+
+
+
+
+
+76. Compress a file by compress, bzip2 commands and decompress it again.  
+------------------------------------------------------------------------
+
+compress -v file.txt
+bzip2 -v file.txt
+
+-v: verbose to show what happens and display it
+
+
+
+
+
+77. What is the command used to view the content of a .Z compressed file.  
+--------------------------------------------------------------------------
+
+uncompress -v file.txt
+
+bunzip2 -v file.txt.bz2      "Difference here must write the file name as it is with the new extension"
+
+
+
+
+
+78. Backup/Archive /etc directory using tar utility. 
+-----------------------------------------------------
+
+tar -cvf archive_test /etc
+
+tar -xv archive_test
+
+tar -tf archive_test
+
+for compressed file.tar
+
+zcat file.tar  "will display it's contents without uncompressing"
+
+
+
+tar: The command to create or extract archives.
+
+-x: extract the tar file
+
+-c: Create a new archive.
+
+-z: Decompress/Compress the archive using gzip (produces .tar.gz format).
+
+-v: Verbose mode, shows the progress (i.e., lists the files being archived).
+
+-t: shows contents of tar file without unarchiving it
+
+-f: make the extraction display human readable text with -v option.
+
+/path/to/backup/etc-backup.tar.gz: The path and name of the archive file you're creating. Replace /path/to/backup/ with your desired directory where you want to store the backup.
+
+/etc: The directory you want to back up.
+
+
+
+
+
+
+79. Starting from your home directory, find all files that were modified in the last two day.
+----------------------------------------------------------------------------------------------
+
+find ~ -f -mtime 2
+
+-f: Ensures that only files (not directories) are included.
+-mtime: modification time
+-mtime  n: Finds files that were modified exactly n days ago
+-mtime -n: Finds files that were modified less than n days ago
+-mtime +n: Finds files that were modified more than n days ago
+
+
+
+
+
+
+80. Starting from /etc, find files owned by root user.
+-------------------------------------------------------
+
+find /etc -f -user root
+
+
+
+
+
+
+81. Find all directories in your home directory.  
+-------------------------------------------------
+
+find ~ -d
+
+
+
+
+
+
+82. Write a command to search for all files on the system that, its name is “.profile”. 
+----------------------------------------------------------------------------------------
+
+find / -type f -name ".profile"
+
+
+
+
+
+83. Write a command to search for all files on the system that, its name is “.profile”. 
+----------------------------------------------------------------------------------------
+
+find / -type f -name ".profile"

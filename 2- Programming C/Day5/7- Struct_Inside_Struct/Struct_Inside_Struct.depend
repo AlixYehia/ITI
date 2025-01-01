@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1730284302 source:c:\users\aliye\onedrive\desktop\iti\c\struct_inside_struct\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"MyLibrary.h"
+
